@@ -2,7 +2,7 @@
 
 TensorFlow implementation of our paper: "[Arun _et al_.: Automated detection of aggressive and indolent prostate cancer on magnetic resonance imaging [Medical Physics 2021]](https://aapm.onlinelibrary.wiley.com/doi/epdf/10.1002/mp.14855)".
 
-Our source code has been tested successfully on Windows 10, Cuda 10.0, RTX 2080 Ti, Anaconda Python 3.7, Tensorflow 1.14.
+Our source code has been tested successfully on Windows 10, Cuda 10.1, RTX 2080 Ti, Anaconda Python 3.7, Tensorflow 1.14.
 
 The code is only for research purposes. If you have any questions regarding how to use this code, feel free to contact Dr.Mirabela Rusu ([Mirabela@stanford.edu](Mirabela@stanford.edu)).
 
