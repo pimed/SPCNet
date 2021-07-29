@@ -42,7 +42,7 @@ Our study included patients data from two independent cohorts acuqired at Stanfo
 To run the code without any OS comaptiablity issue the `environment.yml` is already exported (Windows 10). You can create the the same enviroment as following:
  ```
 conda env create -f environment.yml
-conda activate pytorch_env
+conda activate tf_gpu
 ```
 
 
