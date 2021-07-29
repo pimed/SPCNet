@@ -1,6 +1,6 @@
 # SPCNet
 
-TensorFlow implementation of our paper: "[Automated detection of aggressive and indolent prostate cancer on magnetic resonance imaging [Medical Physics 2021]](https://aapm.onlinelibrary.wiley.com/doi/epdf/10.1002/mp.14855)".
+TensorFlow implementation of our paper: "[Arun _et al_.: Automated detection of aggressive and indolent prostate cancer on magnetic resonance imaging [Medical Physics 2021]](https://aapm.onlinelibrary.wiley.com/doi/epdf/10.1002/mp.14855)".
 
 Our source code has been tested successfully on Windows 10, Cuda 10.0, RTX 2080 Ti, Anaconda Python 3.8, Tensorflow 2.0.
 
