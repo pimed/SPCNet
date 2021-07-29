@@ -12,7 +12,7 @@ The code is only for research purposes. If you have any questions regarding how 
 
 ---
 # Abstract
-While multi-parametric magnetic resonance imaging (MRI) shows great promise in assist-ing with prostate cancer diagnosis and localization, subtle differences in appearan ce between cancerand normal tissue lead to many false positive and false negative interpretations by radiologists. Wesought to automatically detect aggressive cancer (Gleason pattern ≥ 4) and indolent cancer (Gleasonpattern 3) on a per-pixel basis on MRI to facilitate the targeting of aggressive cancer during biopsy. We created the Stanford Prostate Cancer Network (SPCNet), a convolutional neural net-work model, trained to distinguish between aggressive ca ncer, indolent cancer, and normal tissue onMRI. Ground truth cancer labels were obtained by registering MRI with whole-mount digitalhistopathology images from patients who underwent radical prostatectomy. Before registration, thesehistopathology images were automatically annotated to show Gleason patterns on a per-pixel basis.The model was trained on data from 78 patients who underwent radical prostatectomy and 24 patientswithout prostate cancer. The model was evaluated on a pixel and lesion level in 322 patients, includ-ing six patients with normal MRI and no cancer, 23 patients who underwent radical prostatectomy,and 293 patients who underwent biopsy. Moreover, we assessed the ability of our model to detectclinically significant cancer (lesions with an aggressive component) and compared it to the perfor-mance of radiologists.
+While multi-parametric magnetic resonance imaging (MRI) shows great promise in assisting with prostate cancer diagnosis and localization, subtle differences in appearance between cancer and normal tissue lead to many false positive and false negative interpretations by radiologists. We sought to automatically detect aggressive cancer (Gleason pattern ≥ 4) and indolent cancer (Gleason pattern 3) on a per-pixel basis on MRI to facilitate the targeting of aggressive cancer during the biopsy. We created the Stanford Prostate Cancer Network (SPCNet), a convolutional neural network model trained to distinguish between aggressive cancer, indolent cancer, and normal tissue on MRI. Ground truth cancer labels were obtained by registering MRI with whole-mount digital histopathology images from patients who underwent radical prostatectomy. Before registration, these histopathology images were automatically annotated to show Gleason patterns on a per-pixel basis. The model was trained on data from 78 patients who underwent radical prostatectomy and 24 patients without prostate cancer. The model was evaluated on a pixel and lesion level in 322 patients, including six patients with normal MRI and no cancer, 23 patients who underwent radical prostatectomy, and 293 patients who underwent biopsy. Moreover, we assessed the ability of our model to detect clinically significant cancer (lesions with an aggressive component) and compared it to the performance of radiologists.
 
 <table align="center" border=0><tr><td align="center" width="9999">
 <img src="images/prediction.png" align="center" width="800" alt="Project icon">
@@ -23,7 +23,7 @@ While multi-parametric magnetic resonance imaging (MRI) shows great promise in a
 ---
 
 ## Dataset
-Our study included patients data from two independent cohorts acuqired at Stanford Medicine, and it can not be shared at the moment. A detailed description of the training data can be found on the paper. For further information, please contact Dr.Mirabela Rusu ([Mirabela@stanford.edu](Mirabela@stanford.edu)).
+Our study included patients data from two independent cohorts acquired at Stanford Medicine, and it can not be shared at the moment. A detailed description of the training data can be found in the paper. For further information, please contact Dr.Mirabela Rusu ([Mirabela@stanford.edu](Mirabela@stanford.edu)).
 
 ## Dependencies
 - Python 3.7
@@ -39,7 +39,7 @@ Our study included patients data from two independent cohorts acuqired at Stanfo
  git clone https://github.com/PIMED/SPCNet/
  cd SPCNet
 ```
-To run the code without any OS comaptiablity issue the `environment.yml` is already exported (Windows 10). You can create the the same enviroment as following:
+To run the code without any OS compatibility issue the `environment.yml` is already exported (Windows 10). You can create the same environment as follows:
  ```
 conda env create -f environment.yml
 conda activate tf_gpu
