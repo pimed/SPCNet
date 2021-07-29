@@ -1,0 +1,43 @@
+-- losses.py include two functions which are also present in utility_functions.py. See which path is used for loading these in main scripts and remove the duplication
+-- num_normal, num_ind, num_agg still hardcoded. added a comment that they are computed based on training set. leave it at that now? include function?
+-- agg_threshold, ind_threshold, norm_threshold -- added a comment that they were computed based on cross-validation folds. leave it at that now?
+-- trained model weights? share the SPCNet model weights presented in medphys? Arun -- can you share?
+-- added one line descriptions of functions, can be elaborated.
+-- to run train.py and evaluation.py, you can use the example paths below. This is not the MedPhys data, but this is the data used for CorrSigNIA submission to MEDIA. i don't think it matters as long as the code runs. 
+
+ 
+example training data:
+    
+    
+    parser.add_argument('--output_filepath', type=str, required = True)
+    parser.add_argument('--t2_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/train/after_nyul/T2_norm/" )
+    parser.add_argument('--adc_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/train/after_nyul/ADC_norm/")
+    parser.add_argument('--mask_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/train/mri_mask/")
+    parser.add_argument('--all_cancer_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/train/all_cancerlabels/")
+    parser.add_argument('--agg_cancer_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/train/agg_cancerlabels/")
+    parser.add_argument('--ind_cancer_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/train/ind_cancerlabels/")
+    parser.add_argument('--batch_size', type=int, default=8)
+    parser.add_argument('--epochs', type=int, default=2)
+    parser.add_argument('--folds', type=int, default=5)
+    parser.add_argument('--lr', type=float, default=1e-3)
+    args = parser.parse_args()
+
+
+
+example test data:
+    
+    
+    parser.add_argument('--output_filepath', type=str, required = True)
+    parser.add_argument('--t2_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/test/after_nyul/T2_norm/" )
+    parser.add_argument('--adc_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/test/after_nyul/ADC_norm/")
+    parser.add_argument('--mask_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/test/mri_mask/")
+    parser.add_argument('--all_cancer_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/test/all_cancerlabels/")
+    parser.add_argument('--agg_cancer_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/test/agg_cancerlabels/")
+    parser.add_argument('--ind_cancer_filepath', type=str, default = "Z:/RadPathFusion/Indrani_RadPath/Projected_masked/Size224_unmasked/smoothed_sigma0.25_v2/flexpad/all_grades_data_01172021/MEDIA_revision2021/test/ind_cancerlabels/")
+    parser.add_argument('--batch_size', type=int, default=8)
+    parser.add_argument('--epochs', type=int, default=2)
+    parser.add_argument('--folds', type=int, default=5)
+    parser.add_argument('--lr', type=float, default=1e-3)
+    args = parser.parse_args()
+
+
