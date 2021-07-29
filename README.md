@@ -2,7 +2,7 @@
 
 TensorFlow implementation of our paper: "[Arun _et al_.: Automated detection of aggressive and indolent prostate cancer on magnetic resonance imaging [Medical Physics 2021]](https://aapm.onlinelibrary.wiley.com/doi/epdf/10.1002/mp.14855)".
 
-Our source code has been tested successfully on Windows 10, Cuda 10.0, RTX 2080 Ti, Anaconda Python 3.8, Tensorflow 2.0.
+Our source code has been tested successfully on Windows 10, Cuda 10.0, RTX 2080 Ti, Anaconda Python 3.7, Tensorflow 1.14.
 
 The code is only for research purposes. If you have any questions regarding how to use this code, feel free to contact Dr.Mirabela Rusu ([Mirabela@stanford.edu](Mirabela@stanford.edu)).
 
@@ -26,9 +26,9 @@ While multi-parametric magnetic resonance imaging (MRI) shows great promise in a
 Our study included patients data from two independent cohorts acuqired at Stanford Medicine, and it can not be shared at the moment. A detailed description of the training data can be found on the paper. For further information, please contact Dr.Mirabela Rusu ([Mirabela@stanford.edu](Mirabela@stanford.edu)).
 
 ## Dependencies
-- Python 3.8
-- TensorFlow 2.0
-- SimpleITK 2.0.0
+- Python 3.7
+- TensorFlow 1.14
+- SimpleITK 1.2.2
 - scikit-image
 - scikit-learn
 
