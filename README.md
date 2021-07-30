@@ -1,4 +1,11 @@
-# SPCNet
+<div align="center">
+
+# SPCNet: Automated detection of aggressive and indolent prostate cancer on magnetic resonance imaging
+
+[![Paper](https://img.shields.io/badge/arXiv-2011.11390-brightgreen)](https://arxiv.org/abs/2011.11390)
+[![journal](https://img.shields.io/badge/Journal-Medical%20Physics-red)](https://aapm.onlinelibrary.wiley.com/doi/epdf/10.1002/mp.14855)
+
+</div>
 
 TensorFlow implementation of our paper: "[Arun _et al_.: Automated detection of aggressive and indolent prostate cancer on magnetic resonance imaging [Medical Physics 2021]](https://aapm.onlinelibrary.wiley.com/doi/epdf/10.1002/mp.14855)".
 
