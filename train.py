@@ -17,9 +17,9 @@ def train(args):
   Train SPCNet
   :param args: network parameters and configurations
   """
-  
+  # call the SPCNET model 
   model = SPCNet_all()
-
+  # a dicationary for training data paths including T2, ADC, and Porstate Gland mask plus corresponding lesion labels. 
   path_dict = {'t2': args.t2_filepath,
                'adc': args.adc_filepath,
                'prostate': args.mask_filepath,
