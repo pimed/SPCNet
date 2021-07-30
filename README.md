@@ -54,7 +54,7 @@ conda activate tf_gpu
 
 
 ## Train SPCNET On Your Data
-To train SPCNET on your data, you can run train.py file as following:
+Please place your MRI data and their corresponding labels in the dataset directory. To train SPCNET on your data, you can run train.py file as following:
  
  ```python -u train.py --output_filepath OUTPUT_FOLDER  --t2_filepath  T2_FOLDER --adc_filepath ADC_FOLDER --mask_filepath ADC_T2_FOLDER --all_cancer_filepath CANCER_FOLDER_LABEL --agg_cancer_filepath AGGRESIVE_LABEL FOLDER --ind_cancer_filepath INDOLET_LABEL_FOLDER```
  
