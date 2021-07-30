@@ -115,8 +115,7 @@ class SPCNet_all():
 
         # optimizer = self.create_optimizer()
         optimizer = Adam(lr=lr)
-        #-----------------------------------------------------------------------------
-        #IB: better not to give hard coded numbers here, include a small function that computes the num_normal, num_agg, num_ind instead
+
         #-------------------------------------------------------------------------------
         # num_normal, num_indolent and num_agg pixels are the number of normal, indolent and aggressive pixels computed in the training set
         model.compile(loss={'o11': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
