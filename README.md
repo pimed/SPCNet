@@ -69,7 +69,7 @@ To test the trained model and compute the different metrics for all the levels, 
 ---
 
 ## Citations
-Please consider citing the following papers in your publications if source code helped your research.
+Please consider citing the following papers in your publications if the source code helped your research.
 ```bibtex
 @article{Seetharaman2021,
 author = {Seetharaman, Arun and Bhattacharya, Indrani and Chen, Leo C. and Kunder, Christian A. and Shao, Wei and Soerensen, Simon J. C. and Wang, Jeffrey B. and Teslovich, Nikola C. and Fan, Richard E. and Ghanouni, Pejman and Brooks, James D. and Too, Katherine J. and Sonn, Geoffrey A. and Rusu, Mirabela},
