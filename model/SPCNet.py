@@ -1,9 +1,10 @@
 # --------------------------------------------------------
-# SPCNet training
+# SPCNet model
 # Copyright (c) 2021 PIMED@Stanford
 #
 # Written by Arun Seetharaman
 # --------------------------------------------------------
+
 import numpy as np
 
 from keras.layers import Conv2D, Conv2DTranspose, Input, MaxPooling2D, BatchNormalization
@@ -14,12 +15,11 @@ from keras.optimizers import Adam
 from .losses import categorical_cross_entropy_balanced
 
 
-class SPCNet_all():
+class SPCNet():
     # Thresholds selected based on optimum performance on cross-validation sets
     agg_threshold = .20
     ind_threshold = .15
     normal_threshold = .60
-    agg_bias = .14
 
     def network(self, lr, size=224, num_channels=3):
         def side_branch(x, factor):
@@ -116,26 +116,27 @@ class SPCNet_all():
         # optimizer = self.create_optimizer()
         optimizer = Adam(lr=lr)
 
-        #-------------------------------------------------------------------------------
+        # -------------------------------------------------------------------------------
         # num_normal, num_indolent and num_agg pixels are the number of normal, indolent and aggressive pixels computed in the training set
-        model.compile(loss={'o11': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'o21': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'o31': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'o12': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'o22': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'o32': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'o4': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'o5': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            'ofuse': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
-                            },
-                      optimizer=optimizer)
+        model.compile(
+            loss={'o11': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'o21': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'o31': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'o12': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'o22': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'o32': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'o4': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'o5': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  'ofuse': categorical_cross_entropy_balanced(num_normal=9468014, num_agg=346237, num_ind=369685),
+                  },
+            optimizer=optimizer)
 
         return model
 
     def get_x_y(self, t2_np, adc_np, y=None):
         x = [t2_np, adc_np]
         if y is not None:
-           y = [y, y, y, y, y, y, y, y, y]
+            y = [y, y, y, y, y, y, y, y, y]
         num_channels = 3
         return x, y, num_channels
 

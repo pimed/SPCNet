@@ -1,28 +1,29 @@
+# --------------------------------------------------------
+# SPCNet util functions
+# Copyright (c) 2021 PIMED@Stanford
+#
+# Written by Arun Seetharaman
+# --------------------------------------------------------
+
 import os
 import random
 import matplotlib.pyplot as plt
 import numpy as np
-import pandas as pd
 from sklearn import metrics
 from scipy import interp
 import SimpleITK as sitk
-import tensorflow as tf
 from skimage.morphology import disk, closing
 from skimage.measure import label
-
-from keras import backend as K
 from sklearn.model_selection import KFold
 from imutils import rotate
 
-def prepare_data(path_dict, cancer_only=True, bx_lesions=False, rp_lesions=False, rad_lesions=False):
+
+def prepare_data(path_dict, cancer_only=True):
     """
     prepare data for training
 
     :param path_dict: path dictionary for all images and their correspoding labels
     :param cancer_only: weather to process only cancer label or not
-    :param bx_lesions: bounding box for lesions
-    :param rp_lesions: if the lesions are from RP cohort or not
-    :param rad_lesions: if the lesions are from Rad cohort or not
     :return:
     """
     t2_path = path_dict['t2']
@@ -88,20 +89,6 @@ def prepare_data(path_dict, cancer_only=True, bx_lesions=False, rp_lesions=False
             agg_label = sitk.ReadImage(os.path.join(agg_label_path, agg_label_file))
             agg_label_np = sitk.GetArrayFromImage(agg_label)
             label_np[agg_label_np > 0] = 2  # sets grade4+ pixels to 2 even if there is overlap with grade3
-
-        # replace label with radiologist lesion if necessary
-        if rp_lesions and 'NP' not in case_id:
-            label_np = get_rp_rad_lesion(mask, path_dict['rp_lesions'], case_id)
-
-        # replace label with biopsy lesion if necessary
-        if bx_lesions and 'NP' not in case_id:
-            bx_case, label_np = get_bx_from_rp(path_dict, case_id, mask, keep_grade=True)
-
-        if rad_lesions:
-            rad_label_path = path_dict['radiologist_labels']
-            label_file = case_id + '_radiologist_label.nii'
-            rad_label = sitk.ReadImage(os.path.join(rad_label_path, label_file))
-            label_np = sitk.GetArrayFromImage(rad_label).astype('float32')
 
         label_orig_list.append(label_np)
         t2_orig_list.append(t2_np)
@@ -172,6 +159,7 @@ def concatenate_data(t2_list, adc_list, label_list, mask_list, index, fold, file
     :param stats: check if the mean and std of training set is avilable or not.
     :return:
     """
+
     def myrotate(im, angle):
         try:
             sub_ims = []
@@ -249,6 +237,7 @@ def create_folds(case_ids, folds):
 
     return splits
 
+
 def export_volume(filepath, ref_volume, np_volume, volume_title, scale=255):
     """
     given a numpy array and reference volume, save volume
@@ -280,6 +269,7 @@ def export_volume(filepath, ref_volume, np_volume, volume_title, scale=255):
 
     return None
 
+
 def evaluate_classifier(total_true, total_pred, thresholds=None, title=None, pred_thresh=None):
     """
     draws roc_curve, computes auc, sensitivity, specificity, accuracy and number of negative samples
@@ -292,17 +282,17 @@ def evaluate_classifier(total_true, total_pred, thresholds=None, title=None, pre
     :return: stats for different metrics to evaluate the model performance.
     """
 
-    #-------------------------------------------------------
+    # -------------------------------------------------------
     # IB: not sure what is the function of pred_thresh and how that is diffrent from thresholds
     # IB: not sure why you choose thresh as thresholds[0]
-    #-----------------------------------------------------------
+    # -----------------------------------------------------------
     total_true = np.concatenate(total_true)
     total_pred = np.concatenate(total_pred)
-   
+
     mean_fpr, mean_tpr, per_pixel_auc = draw_roc_curve([total_true], [total_pred], title)
-    print (mean_fpr, mean_tpr, per_pixel_auc)
+    print(mean_fpr, mean_tpr, per_pixel_auc)
     thresh = thresholds[0]
-    print (thresh)
+    print(thresh)
     if pred_thresh is not None:
         pred = np.concatenate(pred_thresh)
     else:
@@ -330,6 +320,7 @@ def evaluate_classifier(total_true, total_pred, thresholds=None, title=None, pre
              'Num Negatives': np.sum(1 - total_true)}
 
     return stats
+
 
 def draw_roc_curve(total_true, total_pred, threshold=False):
     """
@@ -370,6 +361,7 @@ def draw_roc_curve(total_true, total_pred, threshold=False):
     else:
         return mean_fpr, mean_tpr, mean_auc
 
+
 def generate_lesions(ref_vol, label_np_source, volume_thresh):
     """
     computes connected 3D volumes from pixel-level labels
@@ -409,6 +401,7 @@ def generate_lesions(ref_vol, label_np_source, volume_thresh):
 
     return lesions, num_lesions
 
+
 def findTPFN(mask_np, pred_np, label_np):
     """
     finds the true positives and false negatives for sextant based lesion-level evaluation
@@ -439,6 +432,7 @@ def findTPFN(mask_np, pred_np, label_np):
     GT_pos = np.ones((num_lesions), dtype=float)
     pred_pos = pred_90percent
     return num_lesions, detected_lesions, missed_lesions, GT_pos, pred_pos
+
 
 def findTNFP(ref_vol, mask_np, pred_np, label_np, removesa3D):
     """
@@ -489,17 +483,17 @@ def lesion_classifier(ref_vol, lesion_label_np, pred_np, mask_np):
 
     return true, pred
 
+
 def grade_lesion_classifier(ref_vol, lesions, num_lesions, agg_pred_np, label_np, mask_np, normal_case=False):
     # classifies a lesion into aggressive/indolent based on deep_bio_pixels (digitial pathology labels)
     agg_ratio_thresh = .01
 
-    
     new_lesions = np.copy(lesions)
 
     deep_bio_pixels = label_np[np.logical_and(np.logical_or(label_np == 2, label_np == 1), lesions > 0)]
 
     if np.sum(deep_bio_pixels) > 0:
-        for lesion in range(1, num_lesions+1):
+        for lesion in range(1, num_lesions + 1):
             lesion_pixels = label_np[lesions == lesion]
             agg_ratio = np.sum(lesion_pixels == 2) / lesion_pixels.size
 
@@ -515,8 +509,9 @@ def grade_lesion_classifier(ref_vol, lesions, num_lesions, agg_pred_np, label_np
 
     return true, pred
 
-def patient_lesion_classifier_no_sextant(ref_vol, lesions, num_lesions, agg_pred_np, label_np, mask_np, normal_case=False):
 
+def patient_lesion_classifier_no_sextant(ref_vol, lesions, num_lesions, agg_pred_np, label_np, mask_np,
+                                         normal_case=False):
     agg_ratio_thresh = .05
 
     # might want to focus only on pixels defined by deep bio
@@ -525,7 +520,7 @@ def patient_lesion_classifier_no_sextant(ref_vol, lesions, num_lesions, agg_pred
     deep_bio_pixels = label_np[np.logical_and(np.logical_or(label_np == 2, label_np == 1), lesions > 0)]
 
     if np.sum(deep_bio_pixels) > 0:
-        for lesion in range(1, num_lesions+1):
+        for lesion in range(1, num_lesions + 1):
             lesion_pixels = label_np[lesions == lesion]
             agg_ratio = np.sum(lesion_pixels == 2) / lesion_pixels.size
 
