@@ -11,7 +11,7 @@ TensorFlow implementation of our paper: "[Arun _et al_.: Automated detection of 
 
 Our source code has been tested successfully on Windows 10, Cuda 10.1, RTX 2080 Ti, Anaconda Python 3.7, Tensorflow 1.14 - 2.0.0
 
-The code is only for research purposes. If you have any questions regarding how to use this code, feel free to contact Dr.Mirabela Rusu ([Mirabela@stanford.edu](Mirabela@stanford.edu)).
+The code is only for research purposes. If you have any questions regarding how to use this code, feel free to contact Dr.Mirabela Rusu ([Mirabela.rusu@stanford.edu](Mirabela.rusu@stanford.edu)).
 
 <table align="center" border=0><tr><td align="center" width="9999">
 <img src="images/spcnet.png" align="center" width="800" alt="Project icon">
